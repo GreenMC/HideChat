@@ -1,0 +1,7 @@
+name: HideChat
+version: '${project.version}'
+main: io.github.greenmc.hidechat.HideChat
+api-version: '1.13'
+softdepend:
+  - EssentialsX
+  - LiteBans
