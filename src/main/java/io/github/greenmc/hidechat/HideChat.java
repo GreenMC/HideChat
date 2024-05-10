@@ -1,6 +1,7 @@
 package io.github.greenmc.hidechat;
 
 import io.github.greenmc.hidechat.events.Events;
+import io.github.greenmc.hidechat.hook.HideChatHook;
 import io.github.greenmc.hidechat.hook.HookManager;
 import io.github.greenmc.hidechat.user.UserManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -22,7 +23,11 @@ public class HideChat extends JavaPlugin {
 
         new Events(this);
 
-        getLogger().info("Initialization finished, hooked into %s.".formatted(hookManager.getHook().getName()));
+        final var hook = this.hookManager.getHook();
+        final var message = "Initialization finished, " + (hook == HideChatHook.DEFAULT ?
+                "no ban plugin found. Using default provider." : "hooked into %s.".formatted(hook.getName()));
+
+        getLogger().info(message);
     }
 
     @NotNull
