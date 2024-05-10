@@ -5,3 +5,4 @@ api-version: '1.13'
 softdepend:
   - EssentialsX
   - LiteBans
+  - LibertyBans
