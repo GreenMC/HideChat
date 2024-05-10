@@ -2,6 +2,7 @@ package io.github.greenmc.hidechat.hook;
 
 import io.github.greenmc.hidechat.HideChat;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Despical
@@ -10,30 +11,28 @@ import org.bukkit.entity.Player;
  */
 public class HookManager {
 
-	private final HideChat plugin;
 	private final HideChatHook hook;
 
 	public HookManager(HideChat plugin) {
-		this.plugin = plugin;
-
 		var pluginManager = plugin.getServer().getPluginManager();
-		HideChatHook foundHook = null;
+		var foundHook = HideChatHook.DEFAULT;
 
-		for (var hook : Hooks.values()) {
+		for (var hook : HideChatHook.values()) {
 			if (!pluginManager.isPluginEnabled(hook.name)) continue;
 
-			foundHook = hook.getImplementation(plugin);
+			foundHook = hook;
+			break;
 		}
 
 		this.hook = foundHook;
 	}
 
 	public boolean isMuted(Player player) {
-		if (this.hook == null) {
-			final var user = plugin.getUserManager().getUser(player);
-			return user.isMuted();
-		}
-
 		return this.hook.isMuted(player);
+	}
+
+	@NotNull
+	public HideChatHook getHook() {
+		return hook;
 	}
 }
