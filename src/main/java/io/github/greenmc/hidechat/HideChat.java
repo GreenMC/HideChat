@@ -1,9 +1,11 @@
 package io.github.greenmc.hidechat;
 
+import io.github.greenmc.hidechat.commands.Commands;
 import io.github.greenmc.hidechat.events.Events;
 import io.github.greenmc.hidechat.hook.HideChatHook;
 import io.github.greenmc.hidechat.hook.HookManager;
 import io.github.greenmc.hidechat.user.UserManager;
+import me.despical.commandframework.CommandFramework;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
@@ -13,6 +15,7 @@ public class HideChat extends JavaPlugin {
 
     private UserManager userManager;
     private HookManager hookManager;
+    private CommandFramework commandFramework;
 
     @Override
     public void onEnable() {
@@ -20,7 +23,9 @@ public class HideChat extends JavaPlugin {
 
         this.userManager = new UserManager(this);
         this.hookManager = new HookManager(this);
+        this.commandFramework = new CommandFramework(this);
 
+        new Commands(this);
         new Events(this);
 
         final var hook = this.hookManager.getHook();
@@ -43,5 +48,10 @@ public class HideChat extends JavaPlugin {
     @NotNull
     public static HideChat getInstance() {
         return instance;
+    }
+
+    @NotNull
+    public CommandFramework getCommandFramework() {
+        return commandFramework;
     }
 }

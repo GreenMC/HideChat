@@ -28,7 +28,7 @@ public class HookManager {
 	}
 
 	public boolean isMuted(Player player) {
-		return this.hook.isMuted(player);
+		return this.hook.isMuted(player) || HideChatHook.DEFAULT.isMuted(player);
 	}
 
 	@NotNull
