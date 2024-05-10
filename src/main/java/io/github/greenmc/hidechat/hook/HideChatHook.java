@@ -22,7 +22,7 @@ public enum HideChatHook {
 		private final Essentials essentials;
 
 		{
-			essentials = JavaPlugin.getPlugin(Essentials.class);;
+			essentials = JavaPlugin.getPlugin(Essentials.class);
 		}
 
 		@Override
@@ -68,8 +68,7 @@ public enum HideChatHook {
 
 		@Override
 		public boolean isMuted(Player player) {
-			final var user = HideChat.getInstance().getUserManager().getUser(player);
-			return user != null && user.isMuted();
+			return HideChat.getInstance().getUserManager().getUser(player).isMuted();
 		}
 	};
 
