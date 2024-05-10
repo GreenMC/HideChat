@@ -21,7 +21,7 @@ public class HideChat extends JavaPlugin {
     public void onEnable() {
         instance = this;
 
-        this.userManager = new UserManager(this);
+        this.userManager = new UserManager();
         this.hookManager = new HookManager(this);
         this.commandFramework = new CommandFramework(this);
 

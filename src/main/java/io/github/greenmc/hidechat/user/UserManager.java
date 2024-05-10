@@ -1,6 +1,5 @@
 package io.github.greenmc.hidechat.user;
 
-import io.github.greenmc.hidechat.HideChat;
 import org.bukkit.entity.Player;
 
 import java.util.HashSet;
@@ -13,13 +12,10 @@ import java.util.Set;
  */
 public class UserManager {
 
-	private final HideChat plugin;
 	private final Set<User> users;
 
-	public UserManager(HideChat plugin) {
-		this.plugin = plugin;
+	public UserManager() {
 		this.users = new HashSet<>();
-
 	}
 
 	public void addUser(Player player) {
@@ -32,6 +28,11 @@ public class UserManager {
 
 	public User getUser(Player player) {
 		var uuid = player.getUniqueId();
-		return this.users.stream().filter(user -> user.getUniqueId().equals(uuid)).findFirst().orElse(null);
+
+		return this.users.stream().filter(user -> user.getUniqueId().equals(uuid)).findFirst().orElseGet(() -> {
+			final var user = new User(uuid);
+			this.users.add(user);
+			return user;
+		});
 	}
 }
