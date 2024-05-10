@@ -5,8 +5,11 @@ import org.bukkit.entity.Player;
 
 public abstract class HideChatHook {
 
-    public HideChatHook(HideChat plugin) {}
+    protected final HideChat plugin;
+
+    public HideChatHook(HideChat plugin) {
+        this.plugin = plugin;
+    }
 
     public abstract boolean isMuted(Player player);
-
 }

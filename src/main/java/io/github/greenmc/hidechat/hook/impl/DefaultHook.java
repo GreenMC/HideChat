@@ -12,7 +12,7 @@ public class DefaultHook extends HideChatHook {
 
     @Override
     public boolean isMuted(Player player) {
-        return false;
+        final var user = plugin.getUserManager().getUser(player);
+        return user != null && user.isMuted();
     }
-
 }

@@ -1,32 +1,21 @@
 package io.github.greenmc.hidechat;
 
-import io.github.greenmc.hidechat.hook.HideChatHook;
-import io.github.greenmc.hidechat.hook.impl.EssentialsHook;
-import io.github.greenmc.hidechat.hook.impl.LibertyBansHook;
-import io.github.greenmc.hidechat.hook.impl.LiteBansHook;
-import org.bukkit.plugin.PluginManager;
+import io.github.greenmc.hidechat.hook.HookManager;
+import io.github.greenmc.hidechat.user.UserManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
 
 public class HideChat extends JavaPlugin {
 
-    private HideChatHook hook;
+    private UserManager userManager;
+    private HookManager hookManager;
 
     @Override
     public void onEnable() {
-        PluginManager pluginManager = getServer().getPluginManager();
-        if (pluginManager.isPluginEnabled("LiteBans")) {
-            hook = new LiteBansHook(this);
-        }
+        this.userManager = new UserManager(this);
+        this.hookManager = new HookManager(this);
 
-        else if (pluginManager.isPluginEnabled("LibertyBans")) {
-            hook = new LibertyBansHook(this);
-        }
-
-        else if (pluginManager.isPluginEnabled("EssentialsX")) {
-            hook = new EssentialsHook(this);
-        }
-
-        getLogger().info(hook.getClass().getName() + " initialized!");
+        //        getLogger().info(hook.getClass().getName() + " initialized!");
         getLogger().info("HideChat v" + getDescription().getVersion() + " now enabled!");
     }
 
@@ -35,4 +24,13 @@ public class HideChat extends JavaPlugin {
         // Plugin shutdown logic
     }
 
+    @NotNull
+    public UserManager getUserManager() {
+        return userManager;
+    }
+
+    @NotNull
+    public HookManager getHookManager() {
+        return hookManager;
+    }
 }
