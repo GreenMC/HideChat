@@ -37,16 +37,16 @@ public enum HideChatHook {
 
 		{
 			Omnibus omnibus = OmnibusProvider.getOmnibus();
-        	this.libertyBans = omnibus.getRegistry().getProvider(LibertyBans.class).orElseThrow();
+			this.libertyBans = omnibus.getRegistry().getProvider(LibertyBans.class).orElseThrow();
 		}
 
 		@Override
 		public boolean isMuted(Player player) {
 			return libertyBans.getSelector()
-					.selectionByApplicabilityBuilder(player.getUniqueId(), player.getAddress().getAddress())
-					.type(PunishmentType.MUTE)
-					.build()
-					.getFirstSpecificPunishment() != null;
+				.selectionByApplicabilityBuilder(player.getUniqueId(), player.getAddress().getAddress())
+				.type(PunishmentType.MUTE)
+				.build()
+				.getFirstSpecificPunishment() != null;
 		}
 	},
 

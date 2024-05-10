@@ -11,47 +11,47 @@ import org.jetbrains.annotations.NotNull;
 
 public class HideChat extends JavaPlugin {
 
-    private static HideChat instance;
+	private static HideChat instance;
 
-    private UserManager userManager;
-    private HookManager hookManager;
-    private CommandFramework commandFramework;
+	private UserManager userManager;
+	private HookManager hookManager;
+	private CommandFramework commandFramework;
 
-    @Override
-    public void onEnable() {
-        instance = this;
+	@NotNull
+	public static HideChat getInstance() {
+		return instance;
+	}
 
-        this.userManager = new UserManager();
-        this.hookManager = new HookManager(this);
-        this.commandFramework = new CommandFramework(this);
+	@Override
+	public void onEnable() {
+		instance = this;
 
-        new Commands(this);
-        new Events(this);
+		this.userManager = new UserManager();
+		this.hookManager = new HookManager(this);
+		this.commandFramework = new CommandFramework(this);
 
-        final var hook = this.hookManager.getHook();
-        final var message = "Initialization finished, " + (hook == HideChatHook.DEFAULT ?
-                "no ban plugin found. Using default provider." : "hooked into %s.".formatted(hook.getName()));
+		new Commands(this);
+		new Events(this);
 
-        getLogger().info(message);
-    }
+		final var hook = this.hookManager.getHook();
+		final var message = "Initialization finished, " + (hook == HideChatHook.DEFAULT ?
+			"no ban plugin found. Using default provider." : "hooked into %s.".formatted(hook.getName()));
 
-    @NotNull
-    public UserManager getUserManager() {
-        return userManager;
-    }
+		getLogger().info(message);
+	}
 
-    @NotNull
-    public HookManager getHookManager() {
-        return hookManager;
-    }
+	@NotNull
+	public UserManager getUserManager() {
+		return userManager;
+	}
 
-    @NotNull
-    public static HideChat getInstance() {
-        return instance;
-    }
+	@NotNull
+	public HookManager getHookManager() {
+		return hookManager;
+	}
 
-    @NotNull
-    public CommandFramework getCommandFramework() {
-        return commandFramework;
-    }
+	@NotNull
+	public CommandFramework getCommandFramework() {
+		return commandFramework;
+	}
 }

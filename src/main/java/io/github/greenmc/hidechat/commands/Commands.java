@@ -20,11 +20,11 @@ public class Commands {
 
 	// TODO - refactor commands.
 	@Command(
-			name = "hidechat",
-			permission = "hidechat",
-			usage = "/hidechat <player> <true/false>",
-			desc = "Toggles player's chat.",
-			min = 2
+		name = "hidechat",
+		permission = "hidechat",
+		usage = "/hidechat <player> <true/false>",
+		desc = "Toggles player's chat.",
+		min = 2
 	)
 	public void mainCommand(CommandArguments arguments) {
 		if (arguments.isArgumentsEmpty()) {
@@ -36,20 +36,20 @@ public class Commands {
 	}
 
 	@Command(
-			name = "hidechat.hide",
-			permission = "hidechat.hide",
-			usage = "/hidechat <player>",
-			desc = "Hides player's chat."
+		name = "hidechat.hide",
+		permission = "hidechat.hide",
+		usage = "/hidechat <player>",
+		desc = "Hides player's chat."
 	)
 	public void hideChat(CommandArguments arguments) {
 		this.setMuteState(arguments, true);
 	}
 
 	@Command(
-			name = "hidechat.show",
-			permission = "hidechat.show",
-			usage = "/hidechat show <player>",
-			desc = "Shows player's chat."
+		name = "hidechat.show",
+		permission = "hidechat.show",
+		usage = "/hidechat show <player>",
+		desc = "Shows player's chat."
 	)
 	public void showChat(CommandArguments arguments) {
 		this.setMuteState(arguments, false);
