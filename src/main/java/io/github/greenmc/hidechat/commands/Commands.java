@@ -4,6 +4,12 @@ import io.github.bilektugrul.butils.Utils;
 import io.github.greenmc.hidechat.HideChat;
 import me.despical.commandframework.Command;
 import me.despical.commandframework.CommandArguments;
+import me.despical.commandframework.Completer;
+import org.bukkit.entity.Player;
+import org.bukkit.util.StringUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Despical
@@ -21,7 +27,7 @@ public class Commands {
 
 	@Command(
 		name = "hidechat",
-		permission = "hidechat",
+		permission = "hidechat.use",
 		usage = "/hidechat <player>",
 		desc = "Toggles player's chat.",
 		max = 1
@@ -44,6 +50,19 @@ public class Commands {
 	public void hideChat(CommandArguments arguments) {
 		this.plugin.reloadConfig();
 		Utils.sendMessage("reloaded", arguments.getSender());
+	}
+
+	@Completer(
+		name = "hidechat",
+		permission = "hidechat.completer"
+	)
+	public List<String> tabCompleter(CommandArguments arguments) {
+		if (arguments.getLength() == 1) {
+			return StringUtil.copyPartialMatches(arguments.getArgument(0, ""),
+				plugin.getServer().getOnlinePlayers().stream().map(Player::getName).toList(), new ArrayList<>());
+		}
+
+		return List.of();
 	}
 
 	private void toggleMuteState(CommandArguments arguments) {
