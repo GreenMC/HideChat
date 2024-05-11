@@ -1,5 +1,6 @@
 package io.github.greenmc.hidechat;
 
+import io.github.bilektugrul.butils.BUtilsLib;
 import io.github.greenmc.hidechat.commands.Commands;
 import io.github.greenmc.hidechat.events.Events;
 import io.github.greenmc.hidechat.hook.HideChatHook;
@@ -25,6 +26,7 @@ public class HideChat extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		instance = this;
+		BUtilsLib.setUsingPlugin(instance);
 
 		this.userManager = new UserManager();
 		this.hookManager = new HookManager(this);

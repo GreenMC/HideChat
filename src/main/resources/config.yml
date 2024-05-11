@@ -1,0 +1,20 @@
+messages:
+  no-permission: '&cI''m sorry &f%player% &cbut you can not do that.'
+
+  help-message:
+    - '%prefix% '
+    - ' &f/hidechat <player name> &6| &eToggles given player''s ability to open their chat.'
+    -
+    - ' &f/hidechat help &6| &eShows this message.'
+    - ' &f/hidechat reload &6| &eReloads the config.'
+
+  toggled:
+    true: '&f%player% &eis not allowed to open their chat anymore.'
+    false: '&f%player% &eis now allowed to open their chat.'
+    to-player:
+      true: '&cYou got muted so you are not allowed to open your chat until you are not muted.'
+      false: '&cYour mute got expired so you are allowed to open your chat again.'
+
+  not-found: '&cThere isn''t a player with that nickname.'
+
+  reloaded: '&eReloaded the config!'

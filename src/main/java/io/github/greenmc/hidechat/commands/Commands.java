@@ -1,8 +1,10 @@
 package io.github.greenmc.hidechat.commands;
 
+import io.github.bilektugrul.butils.Utils;
 import io.github.greenmc.hidechat.HideChat;
 import me.despical.commandframework.Command;
 import me.despical.commandframework.CommandArguments;
+import org.bukkit.command.CommandSender;
 
 /**
  * @author Despical
@@ -18,48 +20,42 @@ public class Commands {
 		this.plugin.getCommandFramework().registerCommands(this);
 	}
 
-	// TODO - refactor commands.
 	@Command(
 		name = "hidechat",
 		permission = "hidechat",
 		usage = "/hidechat <player> <true/false>",
 		desc = "Toggles player's chat.",
-		min = 2
+		max = 1
 	)
 	public void mainCommand(CommandArguments arguments) {
-		if (arguments.isArgumentsEmpty()) {
-			arguments.sendMessage(""); // TODO - send help message.
+		if (arguments.isArgumentsEmpty() || arguments.getArgument(0).equalsIgnoreCase("help")) {
+			Utils.sendMessage("help-message", arguments.getSender());
 			return;
 		}
 
-		this.setMuteState(arguments, arguments.getArgumentAsBoolean(2));
+		this.toggleMuteState(arguments);
 	}
 
 	@Command(
-		name = "hidechat.hide",
-		permission = "hidechat.hide",
-		usage = "/hidechat <player>",
-		desc = "Hides player's chat."
+		name = "hidechat.reload",
+		permission = "hidechat.reload",
+		usage = "/hidechat reload",
+		desc = "Reloads the config."
 	)
 	public void hideChat(CommandArguments arguments) {
-		this.setMuteState(arguments, true);
+		this.plugin.reloadConfig();
+		Utils.sendMessage("reloaded", arguments.getSender());
 	}
 
-	@Command(
-		name = "hidechat.show",
-		permission = "hidechat.show",
-		usage = "/hidechat show <player>",
-		desc = "Shows player's chat."
-	)
-	public void showChat(CommandArguments arguments) {
-		this.setMuteState(arguments, false);
-	}
-
-	private void setMuteState(CommandArguments arguments, boolean muted) {
+	private void toggleMuteState(CommandArguments arguments) {
 		arguments.getPlayer(0).ifPresentOrElse(player -> {
 			final var user = plugin.getUserManager().getUser(arguments.getSender());
-			user.setMuted(muted);
-		}, () -> arguments.sendMessage("No player found with that name.")); // TODO - messages.
+			final var newMuted = !user.isMuted();
+			user.setMuted(newMuted);
+			Utils.sendMessage("toggled." + newMuted, arguments.getSender());
+			Utils.sendMessage("toggled.to-player" + newMuted, player);
+
+		}, () -> Utils.sendMessage("not-found", arguments.getSender()));
 	}
 
 }
