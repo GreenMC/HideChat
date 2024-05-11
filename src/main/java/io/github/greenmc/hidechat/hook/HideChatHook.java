@@ -17,7 +17,7 @@ import space.arim.omnibus.OmnibusProvider;
  */
 public enum HideChatHook {
 
-	ESSENTIALS("Essentials") {
+	ESSENTIALS("EssentialsX") {
 
 		private final Essentials essentials;
 
@@ -29,6 +29,7 @@ public enum HideChatHook {
 		public boolean isMuted(Player player) {
 			return essentials.getUser(player).isMuted();
 		}
+
 	},
 
 	LIBERTY_BANS("LibertyBans") {
@@ -48,6 +49,7 @@ public enum HideChatHook {
 				.build()
 				.getFirstSpecificPunishment() != null;
 		}
+
 	},
 
 	LITE_BANS("LiteBans") {
@@ -62,6 +64,7 @@ public enum HideChatHook {
 		public boolean isMuted(Player player) {
 			return liteBansDB.isPlayerMuted(player.getUniqueId(), null);
 		}
+
 	},
 
 	DEFAULT("Default") {
@@ -70,6 +73,7 @@ public enum HideChatHook {
 		public boolean isMuted(Player player) {
 			return HideChat.getInstance().getUserManager().getUser(player).isMuted();
 		}
+
 	};
 
 	final String name;
@@ -83,4 +87,5 @@ public enum HideChatHook {
 	public String getName() {
 		return name;
 	}
+
 }

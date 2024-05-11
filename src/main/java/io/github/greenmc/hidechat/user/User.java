@@ -37,4 +37,5 @@ public class User {
 	public void setMuted(boolean muted) {
 		this.muted = muted;
 	}
+
 }

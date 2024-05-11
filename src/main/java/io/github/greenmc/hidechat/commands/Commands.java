@@ -61,4 +61,5 @@ public class Commands {
 			user.setMuted(muted);
 		}, () -> arguments.sendMessage("No player found with that name.")); // TODO - messages.
 	}
+
 }

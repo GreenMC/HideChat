@@ -35,4 +35,5 @@ public class HookManager {
 	public HideChatHook getHook() {
 		return hook;
 	}
+
 }

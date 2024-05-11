@@ -35,4 +35,5 @@ public class Events implements Listener {
 	public void onKick(PlayerKickEvent event) {
 		plugin.getUserManager().removeUser(event.getPlayer());
 	}
+
 }

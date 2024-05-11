@@ -35,7 +35,7 @@ public class HideChat extends JavaPlugin {
 
 		final var hook = this.hookManager.getHook();
 		final var message = "Initialization finished, " + (hook == HideChatHook.DEFAULT ?
-			"no ban plugin found. Using default provider." : "hooked into %s.".formatted(hook.getName()));
+			"no punishment plugin found. Using default provider." : "hooked into %s.".formatted(hook.getName()));
 
 		getLogger().info(message);
 	}
