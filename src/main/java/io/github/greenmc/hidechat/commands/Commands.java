@@ -4,7 +4,6 @@ import io.github.bilektugrul.butils.Utils;
 import io.github.greenmc.hidechat.HideChat;
 import me.despical.commandframework.Command;
 import me.despical.commandframework.CommandArguments;
-import org.bukkit.command.CommandSender;
 
 /**
  * @author Despical
@@ -23,12 +22,12 @@ public class Commands {
 	@Command(
 		name = "hidechat",
 		permission = "hidechat",
-		usage = "/hidechat <player> <true/false>",
+		usage = "/hidechat <player>",
 		desc = "Toggles player's chat.",
 		max = 1
 	)
 	public void mainCommand(CommandArguments arguments) {
-		if (arguments.isArgumentsEmpty() || arguments.getArgument(0).equalsIgnoreCase("help")) {
+		if (arguments.isArgumentsEmpty() || "help".equalsIgnoreCase(arguments.getArgument(0))) {
 			Utils.sendMessage("help-message", arguments.getSender());
 			return;
 		}
