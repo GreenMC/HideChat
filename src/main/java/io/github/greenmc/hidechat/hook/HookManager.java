@@ -1,8 +1,11 @@
 package io.github.greenmc.hidechat.hook;
 
 import io.github.greenmc.hidechat.HideChat;
+import io.github.greenmc.hidechat.hook.impl.DefaultHook;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 /**
  * @author Despical
@@ -11,29 +14,32 @@ import org.jetbrains.annotations.NotNull;
  */
 public class HookManager {
 
-	private final HideChatHook hook;
+	private Hook hook;
+	private final Hook defaultHook;
 
 	public HookManager(HideChat plugin) {
 		var pluginManager = plugin.getServer().getPluginManager();
-		var foundHook = HideChatHook.DEFAULT;
 
-		for (var hook : HideChatHook.values()) {
-			if (!pluginManager.isPluginEnabled(hook.name)) continue;
+		this.defaultHook = new DefaultHook();
 
-			foundHook = hook;
-			break;
+		for (var hook : List.of("LiteBans", "Essentials", "LibertyBans")) {
+			if (!pluginManager.isPluginEnabled(hook)) continue;
+
+			try {
+				this.hook = (Hook) Class.forName(hook + "Hook")
+					.getDeclaredConstructor(String.class)
+					.newInstance(hook);
+				break;
+			} catch (Exception ignored) {}
 		}
-
-		this.hook = foundHook;
 	}
 
 	public boolean isMuted(Player player) {
-		return this.hook.isMuted(player) || HideChatHook.DEFAULT.isMuted(player);
+		return this.hook.isMuted(player) || defaultHook.isMuted(player);
 	}
 
-	@NotNull
-	public HideChatHook getHook() {
+	@Nullable
+	public Hook getHook() {
 		return hook;
 	}
-
 }
