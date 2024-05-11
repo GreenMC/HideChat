@@ -4,3 +4,12 @@ authors: [ bilektugrul, Despical ]
 version: ${project.version}
 api-version: 1.13
 softdepend: [ Essentials, LiteBans, LibertyBans ]
+description: Hide Chat plugin.
+
+permissions:
+  hidechat.*:
+    default: op
+    children:
+      hidechat.use: true
+      hidechat.reload: true
+      hidechat.completer: true
