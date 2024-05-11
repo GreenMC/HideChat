@@ -58,7 +58,7 @@ public class Commands {
 	)
 	public List<String> tabCompleter(CommandArguments arguments) {
 		if (arguments.getLength() == 1) {
-			return StringUtil.copyPartialMatches(arguments.getArgument(0, ""),
+			return StringUtil.copyPartialMatches(arguments.getArgument(0),
 				plugin.getServer().getOnlinePlayers().stream().map(Player::getName).toList(), new ArrayList<>());
 		}
 
